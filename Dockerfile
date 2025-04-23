@@ -58,5 +58,3 @@ RUN apk --update-cache add \
     && aws --version \
     && echo "alias ll='ls -hAlF'" > ~/.bashrc \
     && echo "complete -C '/usr/local/bin/aws_completer' aws" >> ~/.bashrc
-
-CMD /bin/bash
