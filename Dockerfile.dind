@@ -1,4 +1,4 @@
-FROM docker:28.1.1-dind
+FROM docker:24.0.3-dind
 
 ENV GLIBC_VER=2.34-r0 \
     LANGUAGE="en_NZ.UTF-8" \
