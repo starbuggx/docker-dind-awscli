@@ -1,23 +1,23 @@
 #!/bin/sh
 set -exu
-sudo docker buildx build --platform linux/amd64 -t bentolor/docker-dind-awscli:latest "."
-sudo docker buildx build --platform linux/amd64 -t bentolor/docker-dind-awscli:dind -f Dockerfile.dind "."
+docker buildx build --platform linux/amd64 -t starbuggx/dind-awscli:latest "."
+docker buildx build --platform linux/amd64 -t starbuggx/dind-awscli:dind -f Dockerfile.dind "."
 
-FULLVER=$(sudo docker run -t --rm  bentolor/docker-dind-awscli aws --version)
+FULLVER=$(docker run -t --rm  starbuggx/dind-awscli aws --version)
 #echo "AWS CLI complete versionstring: $FULLVER"
 VER=$(echo $FULLVER | cut -f 1 -d ' ' | cut -f 2 -d '/')
 #echo "Extracted AWS CLI Version: $VER"
-DOCKERFULLVER=$(sudo docker run -t --rm  bentolor/docker-dind-awscli docker --version)
+DOCKERFULLVER=$(docker run -t --rm  starbuggx/dind-awscli docker --version)
 #echo "Docker CLI complete versionstring: $VER"
 DOCKERVER=$(echo $DOCKERFULLVER | cut -f 3 -d ' ' | cut -f 1 -d ',')
 #echo "Extracted Docker CLI Version: $DOCKERVER"
 
-#echo "Tagging bentolor/docker-dind-awscli:$VER-$DOCKERVER"
-sudo docker tag bentolor/docker-dind-awscli:latest bentolor/docker-dind-awscli:$VER-docker-$DOCKERVER
-#echo "Tagging bentolor/docker-dind-awscli:dind-$VER-$DOCKERVER"
-sudo docker tag bentolor/docker-dind-awscli:dind bentolor/docker-dind-awscli:$VER-dind-$DOCKERVER
+#echo "Tagging starbuggx/dind-awscli:$VER-$DOCKERVER"
+docker tag starbuggx/dind-awscli:latest starbuggx/dind-awscli:$VER-docker-$DOCKERVER
+#echo "Tagging starbuggx/dind-awscli:dind-$VER-$DOCKERVER"
+docker tag starbuggx/dind-awscli:dind starbuggx/dind-awscli:$VER-dind-$DOCKERVER
 
-sudo docker push bentolor/docker-dind-awscli:$VER-docker-$DOCKERVER
-sudo docker push bentolor/docker-dind-awscli:$VER-dind-$DOCKERVER
-sudo docker push bentolor/docker-dind-awscli:latest
-sudo docker push bentolor/docker-dind-awscli:dind
+docker push starbuggx/dind-awscli:$VER-docker-$DOCKERVER
+docker push starbuggx/dind-awscli:$VER-dind-$DOCKERVER
+docker push starbuggx/dind-awscli:latest
+docker push starbuggx/dind-awscli:dind
